@@ -1,0 +1,25 @@
+{
+  "name": "news_explorer_api",
+  "version": "0.0.1",
+  "description": "Backend of the news explorer",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xyroprot/news-explorer-api.git"
+  },
+  "keywords": [
+    "pure-JS",
+    "ES6",
+    "Node.js",
+    "express.js"
+  ],
+  "author": "Vladimir Dyakonov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Xyroprot/news-explorer-api/issues"
+  },
+  "homepage": "https://github.com/Xyroprot/news-explorer-api#readme"
+}
