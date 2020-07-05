@@ -6,9 +6,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const { users, articles } = require('./routes/index');
-const auth = require('./middlewares/auth');
-
+const { users } = require('./routes/index');
 /*
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 */
@@ -22,14 +20,14 @@ app.use(cookieParser());
 app.use(bodyParser.json()); // для собирания JSON-формата
 app.use(bodyParser.urlencoded({ extended: true })); // для приёма веб-страниц внутри POST-запроса
 
-mongoose.connect('mongodb://localhost:27017/mestodb', {
+mongoose.connect('mongodb://localhost:27017/newsexplorer', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
 });
 
-app.use('/', auth, articles);
-app.use('/', auth, users);
+// app.use('/', auth, articles);
+app.use('/', users);
 app.use('*', pageNotFound);
 
 app.use(centralizedErrorHandler);

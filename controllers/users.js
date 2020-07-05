@@ -8,33 +8,19 @@ const {
   NotFoundError,
   BadRequesError,
   ConflictingRequestError,
-} = require('../errors/errors-bundle');
-
-const getUserById = (req, res, next) => {
-  User.findById(req.params.userId)
-    .orFail(new NotFoundError('Нет пользователя с таким id'))
-    .then((user) => res.send({ data: user }))
-    .catch((error) => {
-      if (error.name === 'ValidationError' || error.name === 'CastError') {
-        return next(new BadRequesError('Произошла ошибка при обработке запроса'));
-      }
-      return next(error);
-    });
-};
+} = require('../errors/error-handler');
 
 const createUser = (req, res, next) => {
   const {
-    name, about, avatar, email, password,
+    email, password, name,
   } = req.body;
 
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
-      name, about, avatar, email, password: hash,
+      email, password: hash, name,
     }))
-    .then(() => {
-      res.status(201).send({
-        name, about, avatar, email,
-      });
+    .then((user) => {
+      res.status(201).send({ _id: user._id, email, name });
     })
     .catch((error) => {
       if (error.name === 'ValidationError' || error.name === 'CastError' || !password) {
@@ -64,8 +50,20 @@ const login = (req, res, next) => {
     .catch(next);
 };
 
+const getUser = (req, res, next) => {
+  User.findById(req.user._id)
+    .orFail(new NotFoundError('Нет пользователя с таким id'))
+    .then((user) => res.send({ data: user }))
+    .catch((error) => {
+      if (error.name === 'ValidationError' || error.name === 'CastError') {
+        return next(new BadRequesError('Произошла ошибка при обработке запроса'));
+      }
+      return next(error);
+    });
+};
+
 module.exports = {
-  getUserById,
+  getUser,
   login,
   createUser,
 };
