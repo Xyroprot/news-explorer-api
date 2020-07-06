@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
+const { jwtSecretKey } = require('../explorer.config');
 const User = require('../models/user');
 const {
   NotFoundError,
@@ -40,7 +41,7 @@ const login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'secreWord',
+        NODE_ENV === 'production' ? JWT_SECRET : jwtSecretKey,
         { expiresIn: '7d' },
       );
       res

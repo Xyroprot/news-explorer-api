@@ -1,6 +1,6 @@
 const users = require('express').Router();
 const {
-  celebrate, Joi, errors, Segments,
+  celebrate, Joi, Segments,
 } = require('celebrate');
 
 const auth = require('../middlewares/auth');
@@ -26,7 +26,5 @@ users.get('/users/me', celebrate({
     cookie: Joi.string().required(),
   }).unknown(true),
 }), auth, getUser); // возвращает информацию о пользователе (email и имя)
-
-users.use(errors());
 
 module.exports = users;

@@ -1,6 +1,6 @@
 const articles = require('express').Router();
 const {
-  celebrate, errors, Joi, Segments,
+  celebrate, Joi, Segments,
 } = require('celebrate');
 
 const auth = require('../middlewares/auth');
@@ -36,7 +36,5 @@ articles.delete('/articles/:articleId', celebrate({
     cookie: Joi.string().required(),
   }).unknown(true),
 }), auth, deleteArticle); // удаляет сохранённую статью  по _id
-
-articles.use(errors());
 
 module.exports = articles;
