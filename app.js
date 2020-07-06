@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const { users } = require('./routes/index');
+const { users, articles } = require('./routes/index');
 /*
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 */
@@ -26,7 +26,7 @@ mongoose.connect('mongodb://localhost:27017/newsexplorer', {
   useFindAndModify: false,
 });
 
-// app.use('/', auth, articles);
+app.use('/', articles);
 app.use('/', users);
 app.use('*', pageNotFound);
 
