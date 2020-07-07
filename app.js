@@ -35,7 +35,4 @@ app.use(errorLogger); // логгер ошибок
 app.use(errors()); // обработчик ошибок celebrate
 app.use(centralizedErrorHandler); // централизованный обработчик ошибок
 
-app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(`App listening on port ${PORT}, ${NODE_ENV}, ${mdbConnect}`);
-});
+app.listen(PORT);
