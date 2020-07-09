@@ -5,7 +5,7 @@ const {
 
 const getArticles = (req, res, next) => {
   Article.find({ owner: req.user._id })
-    .orFail(res.send({}))
+    .orFail(new NotFoundError('Статьи не найдены'))
     .then((cards) => {
       res.send({ data: cards });
     })
@@ -14,11 +14,11 @@ const getArticles = (req, res, next) => {
 
 const createArticle = (req, res, next) => {
   const {
-    keyword, title, text, data, source, link, image,
+    keyword, title, text, date, source, link, image,
   } = req.body;
 
   Article.create({
-    keyword, title, text, data, source, link, image, owner: req.user._id,
+    keyword, title, text, date, source, link, image, owner: req.user._id,
   })
     .then((article) => res.send({ data: article }))
     .catch((error) => {

@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use(bodyParser.json()); // для собирания JSON-формата
 app.use(bodyParser.urlencoded({ extended: true })); // для приёма веб-страниц внутри POST-запроса
 
-mongoose.connect(NODE_ENV === 'production' ? MDB_CON : mdbConnect, {
+mongoose.connect(NODE_ENV ? MDB_CON : mdbConnect, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,

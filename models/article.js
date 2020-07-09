@@ -14,7 +14,7 @@ const articleSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  data: { // дата статьи
+  date: { // дата статьи
     type: String,
     required: true,
   },
