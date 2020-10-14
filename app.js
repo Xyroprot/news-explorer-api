@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const helmet = require('helmet');
+const cors = require('cors');
 const { errors } = require('celebrate');
 
 dotenv.config();
@@ -31,6 +32,7 @@ mongoose.connect(NODE_ENV ? MDB_CON : mdbConnect, {
 app.use(limiter); // ограничение числа запросов с одного IP в единицу времени
 app.use(requestLogger); // логгер запросов
 
+app.use(cors());
 app.use('/', articles);
 app.use('/', users);
 app.use('*', pageNotFound);
